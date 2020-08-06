@@ -12,7 +12,7 @@ class Landing extends Component{
 
     test(){
         axios
-            .get(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.city},us&APPID=14591153586b9b9f00539b13c8a274a1`)
+            .get(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.city},us&APPID=`)
             .then(response => {
                 console.log(response)
             })
