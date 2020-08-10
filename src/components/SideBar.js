@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
+
+
 class SideBar extends Component{
     constructor(props){
         super(props);
@@ -53,16 +55,28 @@ class SideBar extends Component{
     render(){
         return (
             <div className="landing">
-                <button onClick={this.test}>test</button>
-                <h3>Today</h3>
-                <p>{this.state.currentTime}</p>
-                <p>{this.state.currentDate}</p>
-                <p>{this.state.temp} &#8457;</p>
-                <p>{this.state.city}</p>
-                <p>{this.state.country}</p>
-                <LinearProgress value={50} />
-                <p>{this.state.humidity}</p>
-                <p>{this.state.wind}</p>
+                <div className="logo">
+                    <h3>Thermo</h3>
+                </div>
+                <div className="menu">
+                    <ul>
+                        <li>Dashboard</li>
+                        <li>Map</li>
+                        <li>Calendar</li>
+                    </ul>
+                </div>
+                <div className="widget">
+                    {/* <button onClick={this.test}>test</button> */}
+                    <h3>Today</h3>
+                    <p>{this.state.currentTime}</p>
+                    <p>{this.state.currentDate}</p>
+                    <p>{this.state.temp} &#8457;</p>
+                    <p>{this.state.city}</p>
+                    <p>{this.state.country}</p>
+                    <LinearProgress variant="determinate" value={this.state.humidity} />
+                    <p>{this.state.humidity}</p>
+                    <p>{this.state.wind}</p>
+                </div>
             </div>
         )
     }
