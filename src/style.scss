@@ -1,18 +1,38 @@
+.App {
+    // background-color: #292929;
+}
 .landing {
     height: 100vh;
     color: #FFF;
     background-color: #6165F7;
     display: flex;
     flex-direction: column;
-    width: 20%;
+    align-items: center;
+    width: 15vw;
     ul {
         list-style: none;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .menu {
+        height: 50%;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
     }
 
-    .menu {
-        height: 50%;
+    .widget {
+        background-color: #FFF;
+        color: #292C32;
+        border-radius: 5%;
+        width: 80%;
+    }
+
+    .widget-compact {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
     }
   }

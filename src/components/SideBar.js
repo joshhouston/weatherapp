@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import WbSunnyIcon from '@material-ui/icons/WbSunny';
 
 
 
@@ -67,9 +68,16 @@ class SideBar extends Component{
                 </div>
                 <div className="widget">
                     {/* <button onClick={this.test}>test</button> */}
-                    <h3>Today</h3>
-                    <p>{this.state.currentTime}</p>
-                    <p>{this.state.currentDate}</p>
+                    <div className="widget-compact">
+                        <div className="widget-icon">
+                            <WbSunnyIcon/>
+                        </div>
+                        <div className="widget-date">
+                            <h3>Today</h3>
+                            <p>{this.state.currentTime}</p>
+                            <p>{this.state.currentDate}</p>
+                        </div>
+                    </div>
                     <p>{this.state.temp} &#8457;</p>
                     <p>{this.state.city}</p>
                     <p>{this.state.country}</p>
