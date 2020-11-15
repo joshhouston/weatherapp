@@ -1,14 +1,16 @@
 .App {
     // background-color: #292929;
+    display: flex;
+    flex-direction: row;
+    background-color: #0A0607;
 }
 .landing {
     height: 100vh;
     color: #FFF;
-    background-color: #6165F7;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 15vw;
+    width: 70vw;
     ul {
         list-style: none;
         display: flex;

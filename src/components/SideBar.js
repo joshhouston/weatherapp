@@ -35,8 +35,9 @@ class SideBar extends Component{
 
     componentDidMount(){
         axios
-            .get(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.city},us&APPID=14591153586b9b9f00539b13c8a274a1`)
+            .get(`https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&appid={14591153586b9b9f00539b13c8a274a1}`)
             .then(response => {
+                console.log(response.data)
                 const temperature = Math.floor(response.data.main.temp * 9/5 - 459.67);
                 const city = response.data.name;
                 const country = response.data.sys.country;
@@ -50,13 +51,19 @@ class SideBar extends Component{
                     humidity: humidity,
                     wind: wind
                 })
+                
+            })
+            .catch(err => {
+                console.log(err)
             })
     }
 
     render(){
         return (
             <div className="landing">
-                <div className="logo">
+
+                
+                {/* <div className="logo">
                     <h3>Thermo</h3>
                 </div>
                 <div className="menu">
@@ -67,7 +74,7 @@ class SideBar extends Component{
                     </ul>
                 </div>
                 <div className="widget">
-                    {/* <button onClick={this.test}>test</button> */}
+                    <button onClick={this.test}>test</button>
                     <div className="widget-compact">
                         <div className="widget-icon">
                             <WbSunnyIcon/>
@@ -78,13 +85,13 @@ class SideBar extends Component{
                             <p>{this.state.currentDate}</p>
                         </div>
                     </div>
-                    <p>{this.state.temp} &#8457;</p>
-                    <p>{this.state.city}</p>
+                    <p id="widget-temp">{this.state.temp} &#8457;</p>
+                    <p id="widget-city">{this.state.city}</p>
                     <p>{this.state.country}</p>
                     <LinearProgress variant="determinate" value={this.state.humidity} />
                     <p>{this.state.humidity}</p>
                     <p>{this.state.wind}</p>
-                </div>
+                </div> */}
             </div>
         )
     }
