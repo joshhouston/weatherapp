@@ -34,23 +34,35 @@ class SideBar extends Component{
     }
 
     componentDidMount(){
+
         axios
-            .get(`https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&appid={14591153586b9b9f00539b13c8a274a1}`)
+            .get(`https://api.openweathermap.org/data/2.5/onecall?lat=33.441792&lon=-94.037689&exclude=minutely,daily&appid=14591153586b9b9f00539b13c8a274a1`)
             .then(response => {
-                console.log(response.data)
-                const temperature = Math.floor(response.data.main.temp * 9/5 - 459.67);
-                const city = response.data.name;
-                const country = response.data.sys.country;
-                const humidity = response.data.main.humidity;
-                const wind = response.data.wind.speed;
+                console.log(response.data.hourly[0])
+                const timestamp = response.data.hourly[0].dt
+                const date = new Date(timestamp * 1000);
+                let hours = date.getHours();
+                // const minutes = "0" + date.getMinutes();
+                // const seconds = "0" + date.getSeconds();
+                // const formatted = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+                const AmOrPm = hours >= 12 ? 'pm' : 'am';
+                hours = (hours % 12) || 12;
+                const minutes = date.getMinutes();
+                const finalTime = hours + AmOrPm
                 
-                this.setState({
-                    temp: temperature,
-                    city: city,
-                    country: country,
-                    humidity: humidity,
-                    wind: wind
-                })
+                // const temperature = Math.floor(response.data.main.temp * 9/5 - 459.67);
+                // const city = response.data.name;
+                // const country = response.data.sys.country;
+                // const humidity = response.data.main.humidity;
+                // const wind = response.data.wind.speed;
+                
+                // this.setState({
+                //     temp: temperature,
+                //     city: city,
+                //     country: country,
+                //     humidity: humidity,
+                //     wind: wind
+                // })
                 
             })
             .catch(err => {
