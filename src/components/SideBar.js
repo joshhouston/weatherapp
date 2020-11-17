@@ -11,7 +11,8 @@ class SideBar extends Component{
         this.state = {
             currentTime: Date().slice(16, 21),
             currentDate: Date().slice(0, 10),
-            temp: '',
+            temp: [],
+            hourly: [],
             city: 'Houston',
             country: '',
             humidity: '',
@@ -38,18 +39,27 @@ class SideBar extends Component{
         axios
             .get(`https://api.openweathermap.org/data/2.5/onecall?lat=33.441792&lon=-94.037689&exclude=minutely,daily&appid=14591153586b9b9f00539b13c8a274a1`)
             .then(response => {
-                console.log(response.data.hourly[0])
-                const timestamp = response.data.hourly[0].dt
-                const date = new Date(timestamp * 1000);
-                let hours = date.getHours();
-                // const minutes = "0" + date.getMinutes();
-                // const seconds = "0" + date.getSeconds();
-                // const formatted = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-                const AmOrPm = hours >= 12 ? 'pm' : 'am';
-                hours = (hours % 12) || 12;
-                const minutes = date.getMinutes();
-                const finalTime = hours + AmOrPm
-                
+                const hourlyTime = response.data.hourly.slice(0, 6)
+                console.log(hourlyTime)
+                for(let i=0; i < hourlyTime.length; i++){
+
+                    //Get time
+                    let dt = hourlyTime[i].dt
+                    let date = new Date(dt * 1000)
+                    let hours = date.getHours()
+                    let AmOrPm = hours >= 12 ? 'pm' : 'am';
+                    hours = (hours % 12) || 12;
+                    const finalTime = hours + AmOrPm
+
+                    //Get temp
+                    let temp = Math.floor(hourlyTime[i].temp * 9/5 - 459.67)
+                    this.setState({
+                        hourly: finalTime,
+                        temp: temp
+                    })
+                    console.log(finalTime, temp);
+                }
+                // console.log(finalTime);
                 // const temperature = Math.floor(response.data.main.temp * 9/5 - 459.67);
                 // const city = response.data.name;
                 // const country = response.data.sys.country;
