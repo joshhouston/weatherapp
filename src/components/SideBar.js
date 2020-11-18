@@ -40,7 +40,9 @@ class SideBar extends Component{
             .get(`https://api.openweathermap.org/data/2.5/onecall?lat=33.441792&lon=-94.037689&exclude=minutely,daily&appid=14591153586b9b9f00539b13c8a274a1`)
             .then(response => {
                 const hourlyTime = response.data.hourly.slice(0, 6)
-                console.log(hourlyTime)
+                const finalTime = []
+                const finalTemp = []
+                
                 for(let i=0; i < hourlyTime.length; i++){
 
                     //Get time
@@ -49,15 +51,19 @@ class SideBar extends Component{
                     let hours = date.getHours()
                     let AmOrPm = hours >= 12 ? 'pm' : 'am';
                     hours = (hours % 12) || 12;
-                    const finalTime = hours + AmOrPm
-
+                    const theTime = hours + AmOrPm
+                    finalTime.push(theTime)
+                   
                     //Get temp
                     let temp = Math.floor(hourlyTime[i].temp * 9/5 - 459.67)
+                    finalTemp.push(temp)
+                    console.log(finalTemp)
+                    
                     this.setState({
                         hourly: finalTime,
                         temp: temp
                     })
-                    console.log(finalTime, temp);
+                    // console.log(finalTime, temp);
                 }
                 // console.log(finalTime);
                 // const temperature = Math.floor(response.data.main.temp * 9/5 - 459.67);
@@ -78,12 +84,33 @@ class SideBar extends Component{
             .catch(err => {
                 console.log(err)
             })
+          
     }
 
     render(){
+        // const {hourly} = this.state
         return (
             <div className="landing">
+                <div className="stack">
 
+                    {/* Time */}
+                    {this.state.hourly.map((time, index) => {
+                        return (
+                            <div className="hourlies" key={index}>
+                                <p>{time}</p>
+                            </div>
+                        )
+                    })}
+
+                    {/* {this.state.temp((temp, index) => {
+                        return (
+                            <div className="temperature" key={index}>
+                                <p>{temp}</p>
+                            </div>
+                        )
+                    })} */}
+
+                </div>
                 
                 {/* <div className="logo">
                     <h3>Thermo</h3>
