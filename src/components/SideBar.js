@@ -16,7 +16,8 @@ class SideBar extends Component{
             city: 'Houston',
             country: '',
             humidity: '',
-            wind: ''
+            wind: '',
+            icon: []
 
         }
         this.test = this.test.bind(this)
@@ -39,29 +40,36 @@ class SideBar extends Component{
         axios
             .get(`https://api.openweathermap.org/data/2.5/onecall?lat=33.441792&lon=-94.037689&exclude=minutely,daily&appid=14591153586b9b9f00539b13c8a274a1`)
             .then(response => {
-                const hourlyTime = response.data.hourly.slice(0, 6)
-                const finalTime = []
-                const finalTemp = []
+                const hourlyTime = response.data.hourly.slice(0, 6);
+                const finalTime = [];
+                const finalTemp = [];
+                const weatherIcon = [];
+                let icon = response.data.hourly[0].weather[0].icon
                 
                 for(let i=0; i < hourlyTime.length; i++){
-
+                    
                     //Get time
-                    let dt = hourlyTime[i].dt
-                    let date = new Date(dt * 1000)
-                    let hours = date.getHours()
+                    let dt = hourlyTime[i].dt;
+                    let date = new Date(dt * 1000);
+                    let hours = date.getHours();
                     let AmOrPm = hours >= 12 ? 'pm' : 'am';
                     hours = (hours % 12) || 12;
-                    const theTime = hours + AmOrPm
+                    const theTime = hours + AmOrPm;
                     finalTime.push(theTime)
                    
                     //Get temp
-                    let temp = Math.floor(hourlyTime[i].temp * 9/5 - 459.67)
-                    finalTemp.push(temp)
-                    console.log(finalTemp)
-                    
+                    let temp = Math.floor(hourlyTime[i].temp * 9/5 - 459.67);
+                    finalTemp.push(temp);
+
+                    //Get Weather Icon status
+                    let icons = hourlyTime[i].weather[0].icon;
+                    weatherIcon.push(icons)
+
+
                     this.setState({
                         hourly: finalTime,
-                        temp: temp
+                        temp: finalTemp,
+                        icon: icon
                     })
                     // console.log(finalTime, temp);
                 }
@@ -88,59 +96,21 @@ class SideBar extends Component{
     }
 
     render(){
-        // const {hourly} = this.state
         return (
             <div className="landing">
                 <div className="stack">
-
                     {/* Time */}
                     {this.state.hourly.map((time, index) => {
                         return (
                             <div className="hourlies" key={index}>
                                 <p>{time}</p>
+                                <p>{this.state.temp[index]}</p>
+                                <img src={`http://openweathermap.org/img/wn/${this.state.icon}.png`} alt="Weather Icon"/>
                             </div>
                         )
                     })}
-
-                    {/* {this.state.temp((temp, index) => {
-                        return (
-                            <div className="temperature" key={index}>
-                                <p>{temp}</p>
-                            </div>
-                        )
-                    })} */}
-
                 </div>
                 
-                {/* <div className="logo">
-                    <h3>Thermo</h3>
-                </div>
-                <div className="menu">
-                    <ul>
-                        <li>Dashboard</li>
-                        <li>Map</li>
-                        <li>Calendar</li>
-                    </ul>
-                </div>
-                <div className="widget">
-                    <button onClick={this.test}>test</button>
-                    <div className="widget-compact">
-                        <div className="widget-icon">
-                            <WbSunnyIcon/>
-                        </div>
-                        <div className="widget-date">
-                            <h3>Today</h3>
-                            <p>{this.state.currentTime}</p>
-                            <p>{this.state.currentDate}</p>
-                        </div>
-                    </div>
-                    <p id="widget-temp">{this.state.temp} &#8457;</p>
-                    <p id="widget-city">{this.state.city}</p>
-                    <p>{this.state.country}</p>
-                    <LinearProgress variant="determinate" value={this.state.humidity} />
-                    <p>{this.state.humidity}</p>
-                    <p>{this.state.wind}</p>
-                </div> */}
             </div>
         )
     }

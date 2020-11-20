@@ -8,33 +8,15 @@
     height: 100vh;
     color: #FFF;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    width: 70vw;
-    ul {
-        list-style: none;
-        display: flex;
-        flex-direction: column;
-    }
+    width: 100vw;
+   
 
-    .menu {
-        height: 50%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-    }
-
-    .widget {
-        background-color: #FFF;
-        color: #292C32;
-        border-radius: 5%;
-        width: 80%;
-    }
-
-    .widget-compact {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-evenly;
-    }
+   .stack {
+       width: 60%;
+       display: flex;
+       flex-direction: row;
+       justify-content: space-evenly;
+   }
   }
