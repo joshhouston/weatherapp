@@ -40,11 +40,11 @@ class SideBar extends Component{
         axios
             .get(`https://api.openweathermap.org/data/2.5/onecall?lat=33.441792&lon=-94.037689&exclude=minutely,daily&appid=14591153586b9b9f00539b13c8a274a1`)
             .then(response => {
+                console.log(response.data);
                 const hourlyTime = response.data.hourly.slice(0, 6);
                 const finalTime = [];
                 const finalTemp = [];
                 const weatherIcon = [];
-                let icon = response.data.hourly[0].weather[0].icon
                 
                 for(let i=0; i < hourlyTime.length; i++){
                     
@@ -69,9 +69,9 @@ class SideBar extends Component{
                     this.setState({
                         hourly: finalTime,
                         temp: finalTemp,
-                        icon: icon
+                        icon: weatherIcon
                     })
-                    // console.log(finalTime, temp);
+                    
                 }
                 // console.log(finalTime);
                 // const temperature = Math.floor(response.data.main.temp * 9/5 - 459.67);
@@ -105,7 +105,7 @@ class SideBar extends Component{
                             <div className="hourlies" key={index}>
                                 <p>{time}</p>
                                 <p>{this.state.temp[index]}</p>
-                                <img src={`http://openweathermap.org/img/wn/${this.state.icon}.png`} alt="Weather Icon"/>
+                                <img src={`http://openweathermap.org/img/wn/${this.state.icon[index]}.png`} alt="Weather Icon"/>
                             </div>
                         )
                     })}
