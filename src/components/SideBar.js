@@ -10,7 +10,7 @@ class SideBar extends Component{
         super(props);
         this.state = {
             currentTime: Date().slice(16, 21),
-            currentDate: Date().slice(0, 10),
+            currentDate: Date().slice(0, 16),
             temp: [],
             hourly: [],
             city: 'Houston',
@@ -40,7 +40,7 @@ class SideBar extends Component{
         axios
             .get(`https://api.openweathermap.org/data/2.5/onecall?lat=33.441792&lon=-94.037689&exclude=minutely,daily&appid=14591153586b9b9f00539b13c8a274a1`)
             .then(response => {
-                console.log(response.data);
+                
                 const hourlyTime = response.data.hourly.slice(0, 6);
                 const finalTime = [];
                 const finalTemp = [];
@@ -98,15 +98,20 @@ class SideBar extends Component{
     render(){
         return (
             <div className="landing">
+                <div className="date">
+                    <h3>{this.state.currentDate}</h3>
+                </div>
                 <div className="stack">
                     {/* Time */}
                     {this.state.hourly.map((time, index) => {
                         return (
-                            <div className="hourlies" key={index}>
-                                <p>{time}</p>
-                                <p>{this.state.temp[index]}</p>
-                                <img src={`http://openweathermap.org/img/wn/${this.state.icon[index]}.png`} alt="Weather Icon"/>
-                            </div>
+                           
+                                <div className="hourlies" key={index}>
+                                    <p>{time}</p>
+                                    <p>{this.state.temp[index]}</p>
+                                    <img src={`http://openweathermap.org/img/wn/${this.state.icon[index]}.png`} alt="Weather Icon"/>
+                                </div>
+                            
                         )
                     })}
                 </div>
