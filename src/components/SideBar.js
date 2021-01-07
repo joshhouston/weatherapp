@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import WbSunnyIcon from '@material-ui/icons/WbSunny';
-
 
 
 class SideBar extends Component{
