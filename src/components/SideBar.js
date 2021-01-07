@@ -20,19 +20,6 @@ class SideBar extends Component{
             icon: []
 
         }
-        this.test = this.test.bind(this)
-    }
-
-    test(){
-        axios
-            .get(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.city},us&APPID=14591153586b9b9f00539b13c8a274a1`)
-            .then(response => {
-                console.log(response)
-            })
-            .catch(err => {
-                console.log(err)
-            })
-            console.log(this.state.currentDateTime)
     }
 
     componentDidMount(){
@@ -73,20 +60,6 @@ class SideBar extends Component{
                     })
                     
                 }
-                // console.log(finalTime);
-                // const temperature = Math.floor(response.data.main.temp * 9/5 - 459.67);
-                // const city = response.data.name;
-                // const country = response.data.sys.country;
-                // const humidity = response.data.main.humidity;
-                // const wind = response.data.wind.speed;
-                
-                // this.setState({
-                //     temp: temperature,
-                //     city: city,
-                //     country: country,
-                //     humidity: humidity,
-                //     wind: wind
-                // })
                 
             })
             .catch(err => {
