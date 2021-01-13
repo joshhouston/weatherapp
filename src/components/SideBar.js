@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-
+import Clock from 'react-live-clock'
 
 class SideBar extends Component{
     constructor(props){
